@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TestPage</title>
+</head>
+
+<body>
+<script>
+    var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+    var socket = new WebSocket(ws_scheme + '://' + window.location.host + '/ws/notification/');
+    socket.onopen = function (event) { console.log(" CONNECTED ") };
+    socket.onmessage = function (event) {
+        var data = JSON.parse(event.data);
+        alert(data.title + " " + data.content);
+    }
+    socket.onclose = function (event) { console.log(" DISCONNECTED ") };
+</script>
+</body>
+
+</html>
